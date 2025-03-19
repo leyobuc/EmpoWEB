@@ -87,6 +87,8 @@ button:focus, a:focus, input:focus {
 .imglogo {
   height: 75px;
   width: 80px;
+  image-rendering: auto;
+  transform: translateZ(0);
 }
 
 .nav-buttons {
@@ -515,4 +517,23 @@ button:focus, a:focus, input:focus {
   background: linear-gradient(to right, var(--dark), var(--secondary));
   text-align: center;
   color: white;
+}
+
+.nav-button,
+.sidebar-close,
+.social-links a {
+  touch-action: manipulation;
+}
+
+.sidebar,
+.overlay,
+.menu-list ul li,
+.collapsible-content {
+  will-change: transform, opacity;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+html {
+  scroll-behavior: smooth;
 }
