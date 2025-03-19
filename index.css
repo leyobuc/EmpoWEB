@@ -379,13 +379,13 @@ button:focus, a:focus, input:focus {
   margin-bottom: 0.5rem;
   letter-spacing: 1px;
   text-shadow: 0 2px 4px rgba(0,0,0,0.2);
-  font-size: 75px;
+  font-size: 60px;
 }
 
 .header h2 {
   font-weight: 400;
   opacity: 0.9;
-  font-size: 1.50rem;
+  font-size: 1.2rem;
   text-shadow: 0 1px 3px rgba(0,0,0,0.1);
 }
 
@@ -491,7 +491,7 @@ button:focus, a:focus, input:focus {
 }
 
 .section-title {
-  font-size: 2rem;
+  font-size: 1.5rem;
   color: var(--dark);
   margin-bottom: 2rem;
   text-align: center;
