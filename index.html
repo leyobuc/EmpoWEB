@@ -62,8 +62,17 @@
 
   <div class="content-container" id="contentContainer">
     <header class="header">
-      <h1>ALL TEXT 10</h1>
-      <h2>Humanity's Soul Than Artificial Logic</h2>
+      <div class="video-background">
+        <video autoplay muted loop playsinline x-webkit-playsinline="true" id="background-video">
+          <source src="./assets/background.mp4" type="video/mp4">
+          <img src="./assets/fallback-bg.jpg" alt="Background pattern">
+        </video>
+        <div class="video-overlay"></div>
+      </div>
+      <div class="header-content">
+        <h1>ALL TEXT 10</h1>
+        <h2>Humanity's Soul Than Artificial Logic.</h2>
+      </div>
     </header>
 
     <main id="main-content" class="container">
@@ -90,7 +99,7 @@
 
       <section class="purpose-section">
         <h2 class="section-title"></h2>
-        <div class="grid">
+        <div class="grid purpose-grid">
           <article class="card collapsible-card" id="vision-section">
             <h3 class="blue-text collapsible-header">
               Vision
@@ -136,6 +145,13 @@
     const menuItems = document.querySelectorAll('.menu-list ul li');
     const collapsibleCards = document.querySelectorAll('.collapsible-card');
     const sectionLinks = document.querySelectorAll('.section-link');
+    const backgroundVideo = document.getElementById('background-video');
+
+    if (backgroundVideo) {
+      backgroundVideo.addEventListener('error', function() {
+        document.querySelector('.video-background').classList.add('video-fallback');
+      });
+    }
 
     function showSearchInput() {
       closeSidebar();
