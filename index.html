@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="ALL TEXT 10 - Balancing AI and human potential for the future of work" />
+  <meta name="description" content="ALL TEXT 10" />
   <meta name="keywords" content="AI, human potential, future of work, technology, automation" />
   <meta name="theme-color" content="#2563eb" />
   <meta name="msapplication-navbutton-color" content="#2563eb" />
@@ -128,17 +128,6 @@
           <source src="./assets/empotech.mp4" type="video/mp4"> 
           <a href="./assets/empotech.mp4">link to the video</a>
         </video>
-        <div class="video-controls">
-          <button class="video-control-btn play-pause">
-            <i class="fas fa-play"></i>
-          </button>
-          <div class="progress-bar">
-            <div class="progress"></div>
-          </div>
-          <button class="video-control-btn mute">
-            <i class="fas fa-volume-up"></i>
-          </button>
-        </div>
       </figure>
       
       <section class="purpose-section">
@@ -363,21 +352,40 @@
 
       menuBtn.addEventListener('click', () => {
         hideSearchInput();
-        
+        openSidebar();
+      });
+
+      function openSidebar() {
         sidebar.classList.add('active');
         overlay.classList.add('active');
         contentContainer.classList.add('shifted');
-        
-        updateAria();
         document.body.style.overflow = 'hidden';
         
         menuItems.forEach((item, index) => {
           setTimeout(() => {
             item.style.opacity = '1';
             item.style.transform = 'translateX(0)';
-          }, 100 + index * 50);
+          }, 100 * (index + 1));
         });
-      });
+        
+        updateAria();
+      }
+
+      let touchStartX = 0;
+      let touchEndX = 0;
+
+      sidebar.addEventListener('touchstart', e => {
+        touchStartX = e.changedTouches[0].screenX;
+      }, { passive: true });
+
+      sidebar.addEventListener('touchmove', e => {
+        touchEndX = e.changedTouches[0].screenX;
+        const swipeDistance = touchStartX - touchEndX;
+        
+        if (swipeDistance > 50) { 
+          closeSidebar();
+        }
+      }, { passive: true });
 
       sidebarClose.addEventListener('click', closeSidebar);
       overlay.addEventListener('click', closeSidebar);
