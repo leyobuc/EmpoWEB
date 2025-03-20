@@ -19,6 +19,143 @@
   --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   --transition-fast: all 0.2s ease;
   --sidebar-width: 300px;
+  --text-color: #1f2937;
+  --bg-color: #ffffff;
+  --card-bg: linear-gradient(145deg, #ffffff, #f3f4f6);
+  --card-border: rgba(229, 231, 235, 0.5);
+  --nav-bg: rgba(255, 255, 255, 0.95);
+  --header-text: #ffffff;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.dark-mode {
+  --text-color: #f8f9fa;
+  --bg-color: #121212;
+  --card-bg: linear-gradient(145deg, #2d3748, #1a202c);
+  --card-border: rgba(74, 85, 104, 0.5);
+  --nav-bg: rgba(26, 32, 44, 0.98);
+  --dark: #f8f9fa;
+  --light: #1a202c;
+  --light-gray: #2d3748;
+  --border-color: rgba(74, 85, 104, 0.5);
+  --header-text: #ffffff;
+}
+
+.dark-mode .theme-toggle {
+  border-color: var(--accent);
+}
+
+.dark-mode .card {
+  background: var(--card-bg);
+  border-color: var(--card-border);
+  color: var(--text-color);
+}
+
+.dark-mode .nav-container {
+  background-color: var(--nav-bg);
+  color: var(--text-color);
+}
+
+.dark-mode .sidebar {
+  background-color: var(--light-gray);
+  color: var(--text-color);
+}
+
+.dark-mode .search-input {
+  background-color: var(--light-gray);
+  border-color: var(--border-color);
+}
+
+.dark-mode .search-input input {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  border-color: var(--border-color);
+}
+
+.dark-mode .content-container {
+  background: linear-gradient(135deg, #1a202c, #2d3748, #374151);
+}
+
+.dark-mode .header-content h1,
+.dark-mode .header-content h2 {
+  color: var(--header-text);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.theme-toggle-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 1rem 0;
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius-md);
+  background-color: var(--bg-color);
+  border: 1px solid var(--card-border);
+}
+
+.theme-label {
+  font-weight: 500;
+}
+
+.theme-toggle {
+  position: relative;
+  width: 60px;
+  height: 30px;
+  background: var(--card-bg);
+  border-radius: 30px;
+  border: 1px solid var(--card-border);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 5px;
+  transition: var(--transition);
+  overflow: hidden;
+}
+
+.theme-toggle i {
+  font-size: 14px;
+  color: var(--text-color);
+  z-index: 1;
+  transition: var(--transition);
+}
+
+.theme-toggle .fa-sun {
+  color: #f59e0b;
+}
+
+.theme-toggle .fa-moon {
+  color: #6b7280;
+}
+
+.theme-toggle .toggle-slider {
+  position: absolute;
+  height: 24px;
+  width: 24px;
+  border-radius: 50%;
+  background: #ffffff;
+  top: 3px;
+  left: 3px;
+  transition: var(--transition);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.theme-toggle.dark-active .toggle-slider {
+  left: 33px;
+  background: #374151;
+}
+
+.theme-toggle.dark-active .fa-sun {
+  color: #6b7280;
+}
+
+.theme-toggle.dark-active .fa-moon {
+  color: #c4b5fd;
 }
 
 * {
@@ -30,8 +167,8 @@
 body {
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
   line-height: 1.6;
-  color: var(--dark);
-  background: var(--light-gray);
+  color: var(--text-color);
+  background: var(--bg-color);
   min-height: 100vh;
   overflow-x: hidden;
   position: relative;
@@ -52,8 +189,8 @@ body {
 }
 
 button:focus, a:focus, input:focus {
-  outline: 2px solid var(--primary);
-  outline-offset: 2px;
+  outline: 3px solid var(--primary);
+  outline-offset: 3px;
 }
 
 .skip-link {
@@ -79,11 +216,12 @@ button:focus, a:focus, input:focus {
   padding: 0.7rem 0.5rem 0.7rem 1rem;
   width: 100%;
   z-index: 100;
-  background-color: rgba(255, 255, 255, 0.95);
+  background-color: var(--nav-bg);
   -webkit-backdrop-filter: blur(5px);
   backdrop-filter: blur(5px);
   box-shadow: var(--shadow);
   transition: transform 0.3s ease;
+  animation: slideInDown 0.5s ease-out forwards;
 }
 
 .imglogo {
@@ -92,6 +230,7 @@ button:focus, a:focus, input:focus {
   max-width: 75px;
   image-rendering: auto;
   transform: translateZ(0);
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
 }
 
 .nav-buttons {
@@ -104,7 +243,7 @@ button:focus, a:focus, input:focus {
   border-radius: 50px;
   background: linear-gradient(135deg, var(--primary), var(--primary-dark));
   border: none;
-  color: var(--light);
+  color: white;
   cursor: pointer;
   transition: var(--transition);
   display: flex;
@@ -133,10 +272,11 @@ button:focus, a:focus, input:focus {
   width: 85%;
   max-width: var(--sidebar-width);
   height: 100vh;
-  background: var(--light);
+  background: var(--bg-color);
   box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
   z-index: 1000;
   transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   padding: 2rem 1rem;
   overflow-y: auto;
   display: flex;
@@ -164,7 +304,7 @@ button:focus, a:focus, input:focus {
   border: none;
   cursor: pointer;
   font-size: 1.5rem;
-  color: var(--dark);
+  color: var(--text-color);
   transition: var(--transition);
   width: 40px;
   height: 40px;
@@ -184,7 +324,7 @@ button:focus, a:focus, input:focus {
   display: block;
   position: static;
   background: transparent;
-  padding: 0;
+  padding: 1rem;
   border: none;
   border-radius: 0;
   box-shadow: none;
@@ -208,7 +348,7 @@ button:focus, a:focus, input:focus {
 .menu-list ul li a {
   padding: 0.75rem 1rem;
   text-decoration: none;
-  color: inherit;
+  color: var(--text-color);
   display: flex;
   align-items: center;
   gap: 0.75rem;
@@ -227,8 +367,8 @@ button:focus, a:focus, input:focus {
 }
 
 .social-links {
-  margin-top: auto;
-  padding-top: 2rem;
+  margin-top: 1rem;
+  padding-top: 1rem;
   display: flex;
   justify-content: center;
   gap: 1rem;
@@ -242,13 +382,13 @@ button:focus, a:focus, input:focus {
   height: 40px;
   border-radius: 50%;
   background: var(--light-gray);
-  color: var(--dark);
+  color: var(--text-color);
   transition: var(--transition);
 }
 
 .social-links a:hover, .social-links a:focus {
   background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-  color: var(--light);
+  color: white;
   transform: translateY(-3px);
   box-shadow: var(--shadow);
 }
@@ -332,6 +472,8 @@ button:focus, a:focus, input:focus {
   display: flex;
   flex-direction: column;
   will-change: transform;
+  opacity: 0;
+  animation: fadeIn 0.5s ease-out 0.3s forwards;
 }
 
 .content-container.shifted {
@@ -340,7 +482,7 @@ button:focus, a:focus, input:focus {
 
 .header {
   position: relative;
-  color: var(--light);
+  color: var(--header-text);
   padding: 4rem 1rem;
   text-align: center;
   margin-bottom: 2rem;
@@ -381,7 +523,7 @@ button:focus, a:focus, input:focus {
   width: 100%;
   height: 100%;
   background: rgb(53, 90, 211);
-  background: linear-gradient(135deg, rgba(56, 71, 138, 0.527), rgba(5, 33, 126, 0));
+  background: linear-gradient(135deg, rgba(56, 71, 138, 0.7), rgba(5, 33, 126, 0.4));
 }
 
 .video-fallback {
@@ -401,6 +543,7 @@ button:focus, a:focus, input:focus {
   letter-spacing: 1px;
   text-shadow: 0 2px 4px rgba(0,0,0,0.2);
   font-size: 2.5rem;
+  color: var(--header-text);
 }
 
 .header h2 {
@@ -408,6 +551,17 @@ button:focus, a:focus, input:focus {
   opacity: 0.9;
   font-size: 1.2rem;
   text-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  color: var(--header-text);
+}
+
+@media (min-width: 768px) {
+  .header h1 {
+    font-size: 3.5rem;
+  }
+  
+  .header h2 {
+    font-size: 1.5rem;
+  }
 }
 
 .container {
@@ -436,8 +590,12 @@ button:focus, a:focus, input:focus {
   }
 }
 
+#features-section {
+  padding: 2rem 0;
+}
+
 .feature-grid {
-  margin-top: -2rem;
+  margin-top: 2rem;
 }
 
 .card {
@@ -448,17 +606,23 @@ button:focus, a:focus, input:focus {
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   border: 1px solid rgba(229, 231, 235, 0.5);
   will-change: transform, box-shadow;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.3s ease;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 .card:hover {
   transform: translateY(-5px);
   box-shadow: var(--shadow-md);
+  animation: cardBounce 0.5s ease-out;
 }
 
 .blue-text {
   color: var(--primary);
   margin-bottom: 1rem;
   font-weight: 800;
+  font-size: 1.5rem;
 }
 
 .purpose-section {
@@ -473,8 +637,10 @@ button:focus, a:focus, input:focus {
   margin-bottom: 2rem;
   position: relative;
   padding-bottom: 1rem;
+  padding: 1rem 0;
   font-weight: 700;
   color: var(--dark);
+  font-size: 2rem;
 }
 
 .section-title::after {
@@ -522,11 +688,13 @@ button:focus, a:focus, input:focus {
 }
 
 .footer {
-  background: linear-gradient(to right, var(--dark), var(--secondary));
+  background: #1A202CFA;
   text-align: center;
   color: whitesmoke;
-  font-size: 0.7.rem;
+  font-size: 0.875rem;
   height: auto;
+  margin-top: auto;
+  padding: 1rem 1rem;
 }
 
 .nav-button,
@@ -544,6 +712,114 @@ button:focus, a:focus, input:focus {
   backface-visibility: hidden;
 }
 
-html {
-  scroll-behavior: smooth;
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+.theme-toggle:hover {
+  animation: pulse 1s infinite;
+}
+
+.card p {
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+@media (max-width: 640px) {
+  .header {
+    height: 50vh;
+  }
+  
+  .header h1 {
+    font-size: 2rem;
+  }
+  
+  .header h2 {
+    font-size: 1rem;
+  }
+  
+  .section-title {
+    font-size: 1.6rem;
+  }
+  
+  .blue-text {
+    font-size: 1.3rem;
+  }
+  
+  .card {
+    padding: 1.25rem;
+  }
+}
+
+.dark-mode .section-title {
+  color: var(--text-color);
+}
+
+.video-background::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--primary-dark);
+  opacity: 0.3;
+}
+
+.animate-ready {
+  will-change: transform, opacity;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+@keyframes slideInDown {
+  from {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes cardBounce {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-7px); }
+  100% { transform: translateY(-5px); }
+}
+
+.nav-button:active {
+  transform: scale(0.95);
+}
+
+.page-transition {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 0;
+  background-color: var(--primary);
+  z-index: 9999;
+  transition: height 0.5s ease;
+}
+
+.page-transition.active {
+  height: 100vh;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
