@@ -31,9 +31,9 @@
   <div class="search-input" id="searchInput" aria-hidden="true">
     <div class="search-input-wrapper">
       <i class="fas fa-search"></i>
-      <input type="text" placeholder="Search..." aria-label="Search input" />
+      <input type="text" placeholder="Search..." aria-label="Search input" id="searchField" />
     </div>
-  </div>
+  </div>  
 
   <aside class="sidebar" id="sidebar" aria-label="Sidebar Menu" aria-hidden="true">
     <div class="sidebar-header">
@@ -126,7 +126,29 @@
       </section>
       
       <section id="about-section" class="hidden-section"></section>
-      <section id="contact-section" class="hidden-section"></section>
+      <section id="contact-section"> </section>
+        <h2 class="section-title">Contact Us</h2>
+        <div class="grid contact-grid">
+          <article class="card contact-card">
+            <div class="contact-info">
+              <i class="fas fa-envelope"></i>
+              <div>
+                <h3 class="blue-text">Email</h3>
+                <p>AllTexTTen@gmail.com</p>
+              </div>
+            </div>
+          </article>
+          <article class="card contact-card">
+            <div class="contact-info">
+              <i class="fas fa-phone"></i>
+              <div>
+                <h3 class="blue-text">Phone Number</h3>
+                <p>+63 (991) 629-4879</p>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
       <section id="faq-section" class="hidden-section"></section>
     </main>
 
@@ -151,6 +173,45 @@
       const sectionLinks = document.querySelectorAll('.section-link');
       const backgroundVideo = document.getElementById('background-video');
       const themeToggle = document.getElementById('themeToggle');
+      const searchField = document.getElementById('searchField');
+  const sectionMap = {
+    'vision': 'vision-section',
+    'mission': 'mission-section',
+    'features': 'features-section',
+    'contact': 'contact-section',
+    'about': 'about-section',
+    'faq': 'faq-section'
+  };
+
+  searchField.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') {
+      const searchTerm = searchField.value.toLowerCase().trim();
+      hideSearchInput();
+      
+      const sectionId = sectionMap[searchTerm];
+      if (sectionId) {
+        const targetSection = document.getElementById(sectionId);
+        if (targetSection) {
+          targetSection.scrollIntoView({ behavior: 'smooth' });
+          
+          if (targetSection.classList.contains('collapsible-card')) {
+            showSectionOnly(sectionId);
+          }
+        }
+      }
+      searchField.value = '';
+    }
+  });
+
+  function showSectionOnly(sectionId) {
+    collapsibleCards.forEach(card => {
+      if (card.id === sectionId && !card.classList.contains('active')) {
+        toggleCollapsible(card);
+      } else if (card.id !== sectionId && card.classList.contains('active')) {
+        toggleCollapsible(card);
+      }
+    });
+  }
       
       themeToggle.addEventListener('click', () => {
         document.documentElement.classList.toggle('dark-mode');
