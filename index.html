@@ -9,14 +9,20 @@
   <meta name="msapplication-navbutton-color" content="#2563eb" />
   <meta name="apple-mobile-web-app-status-bar-style" content="#2563eb" />
   <title>ALL TEXT 10 | Empotech</title>
-  <link rel="stylesheet" href="index.css">
+  <link rel="preload" href="./assets/background.mp4" as="video" type="video/mp4">
+  <link rel="preload" href="./assets/empotech.mp4" as="video" type="video/mp4">
+  <link rel="preload" href="./assets/logo.png" as="image">
+  <link rel="preload" href="index.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="index.css"></noscript>
   <link rel="preload" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
   <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
   <link rel="preconnect" href="https://cdn.jsdelivr.net">
   <link rel="preconnect" href="https://cdnjs.cloudflare.com">
   <link rel="icon" href="./assets/page-icon.png" type="image/png">
+  <style>
+  </style>
 </head>
-<body>
+<body class="loading">
   <a href="#main-content" class="skip-link">Skip to content</a>
   <div class="overlay" id="overlay" aria-hidden="true"></div>
   
@@ -35,7 +41,12 @@
   <div class="search-input" id="searchInput" aria-hidden="true">
     <div class="search-input-wrapper">
       <i class="fas fa-search"></i>
-      <input type="text" placeholder="Search..." aria-label="Search input" id="searchField" />
+      <input type="text" 
+             placeholder="Search sections... (e.g., vision, features)" 
+             aria-label="Search input" 
+             id="searchField" 
+             autocomplete="off" />
+      <div class="search-suggestions" id="searchSuggestions"></div>
     </div>
   </div>  
 
@@ -52,9 +63,7 @@
         <li><a href="#features-section"><i class="fas fa-cubes"></i> Features</a></li>
         <li><a href="#vision-section" class="section-link" data-section="vision-section"><i class="fas fa-eye"></i> Vision</a></li>
         <li><a href="#mission-section" class="section-link" data-section="mission-section"><i class="fas fa-bullseye"></i> Mission</a></li>
-        <li><a href="#about-section"><i class="fas fa-info-circle"></i> About</a></li>
         <li><a href="#contact-section"><i class="fas fa-envelope"></i> Contact</a></li>
-        <li><a href="#faq-section"><i class="fas fa-question-circle"></i> FAQ</a></li>
       </ul>
     </nav>
     <div class="theme-toggle-container">
@@ -65,17 +74,27 @@
       </button>
     </div>
     <div class="social-links">
-      <a href="#" aria-label="Email"><i class="fas fa-envelope"></i></a>
-      <a href="#" aria-label="Contact"><i class="fas fa-address-book"></i></a>
+      <a href="mailto:AllTexTTen@gmail.com" aria-label="Email" title="Email">
+        <i class="fas fa-envelope"></i>
+      <a href="#" aria-label="Contact" title="Contact"><i class="fas fa-address-book"></i></a>
     </div>
   </aside>
 
   <div class="content-container" id="contentContainer">
     <header class="header">
       <div class="video-background">
-        <video autoplay muted loop playsinline preload="metadata" id="background-video">
+        <video 
+          id="background-video"
+          autoplay 
+          muted 
+          loop 
+          playsinline 
+          preload="metadata"
+          width="1920"
+          height="1080"
+        >
           <source src="./assets/background.mp4" type="video/mp4">
-          <img src="./assets/fallback-bg.jpg" alt="Background pattern" loading="lazy">
+          <img src="./assets/fallback-bg.jpg" alt="Background" width="1920" height="1080">
         </video>
         <div class="video-overlay"></div>
       </div>
@@ -95,7 +114,7 @@
           </article>
           <article class="card">
             <h3 class="blue-text">Purpose</h3>
-            <p> The purpose of this advocacy is to raise awareness about the implications of AI replacing humans as workers. It is meant to provoke thoughts and discussion on the future of work in the age of automation and to encourage a more balanced approach to using technology to help enhance the human experience. We are asking for a mindful technological revolution so we can be confident that the AI we create will serve us rather than replace us.</p>
+            <p>The purpose of this advocacy is to raise awareness about the implications of AI replacing humans as workers. It is meant to provoke thoughts and discussion on the future of work in the age of automation and to encourage a more balanced approach to using technology to help enhance the human experience. We are asking for a mindful technological revolution so we can be confident that the AI we create will serve us rather than replace us.</p>
           </article>
           <article class="card">
             <h3 class="blue-text">Introduction</h3>
@@ -103,7 +122,25 @@
           </article>
         </div>
       </section>
-
+      <h2 class="section-title">"The Threads of Humanity and Code in Labor"</h2>
+      <figure class="video-wrapper">
+        <video id="mainVideo" controls preload="metadata" poster="./assets/video-poster.jpg">
+          <source src="./assets/empotech.mp4" type="video/mp4"> 
+          <a href="./assets/empotech.mp4">link to the video</a>
+        </video>
+        <div class="video-controls">
+          <button class="video-control-btn play-pause">
+            <i class="fas fa-play"></i>
+          </button>
+          <div class="progress-bar">
+            <div class="progress"></div>
+          </div>
+          <button class="video-control-btn mute">
+            <i class="fas fa-volume-up"></i>
+          </button>
+        </div>
+      </figure>
+      
       <section class="purpose-section">
         <h2 class="section-title"></h2>
         <div class="grid purpose-grid">
@@ -113,7 +150,7 @@
               <span class="collapsible-icon"><i class="fas fa-chevron-down"></i></span>
             </h3>
             <div class="collapsible-content">
-              <p>We envision a future where human talent and artificial intelligence coexist harmoniously, enhancing productivity without diminishing the importance of human creativity, skills, and personal fulfillment. In our ideal society, AI will enable people to focus on uniquely human experiences and innovative thinking, creating a more balanced technological ecosystem that values both efficiency and human potential.</p>
+              <p>Our Vision is to use our current technology such as or video-making platform and website to produce a man-made video and platform to show awareness of a future in which human talent and artificial intelligence coexist peacefully, increasing production without diminishing the importance of human abilities, creativity, and personal fulfillment. In our ideal society, AI will enable people to concentrate on creativity and distinctively human experiences.</p>
             </div>
           </article>
           
@@ -123,14 +160,13 @@
               <span class="collapsible-icon"><i class="fas fa-chevron-down"></i></span>
             </h3>
             <div class="collapsible-content">
-              <p>Our mission is to raise awareness about AI's impact on human work and interests while promoting a balance between automation and human creativity. We strive to preserve opportunities for meaningful human contribution while ensuring AI functions as a tool for innovation, efficiency, and economic progress. Through education and advocacy, we aim to shape a future where technology enhances rather than replaces human potential.</p>
+              <p>To spread awareness about how AI affects human occupations and interests while encouraging a balance between automation and human ingenuity. We aim to maintain opportunities for meaningful human labor and leisure while ensuring AI functions as a tool for innovation efficiency, and economic progress..</p>
             </div>
           </article>
         </div>
       </section>
       
-      <section id="about-section" class="hidden-section"></section>
-      <section id="contact-section"> </section>
+      <section id="contact-section">
         <h2 class="section-title">Contact Us</h2>
         <div class="grid contact-grid">
           <article class="card contact-card">
@@ -153,14 +189,14 @@
           </article>
         </div>
       </section>
-      <section id="faq-section" class="hidden-section"></section>
     </main>
 
     <footer class="footer">
       <div class="container">
         <div class="footer-content">
-          <p>&copy; 2025 ALL TEXT 10. All rights reserved.</p>
+            </div>
           </div>
+          <p class="copyright">&copy; 2025 ALL TEXT 10. All rights reserved.</p>
         </div>
       </div>
     </footer>
@@ -187,9 +223,7 @@
     'vision': 'vision-section',
     'mission': 'mission-section',
     'features': 'features-section',
-    'contact': 'contact-section',
-    'about': 'about-section',
-    'faq': 'faq-section'
+    'contact': 'contact-section'
   };
 
   searchField.addEventListener('keypress', (e) => {
@@ -480,6 +514,94 @@
       backToTopBtn.addEventListener('click', () => {
         window.scrollTo({ top: 0, behavior: 'smooth' });
       });
+
+      const videoPlayer = {
+        video: document.getElementById('mainVideo'),
+        playPauseBtn: document.querySelector('.play-pause'),
+        muteBtn: document.querySelector('.mute'),
+        progressBar: document.querySelector('.progress-bar'),
+        progress: document.querySelector('.progress'),
+        
+        init() {
+          if (!this.video) return;
+          
+          this.video.addEventListener('loadedmetadata', () => {
+            this.video.volume = 0.5;
+          });
+          
+          this.video.addEventListener('error', (e) => {
+            console.error('Error loading video:', e);
+            this.handleVideoError();
+          });
+          
+          this.playPauseBtn?.addEventListener('click', () => this.togglePlay());
+          this.muteBtn?.addEventListener('click', () => this.toggleMute());
+          this.video.addEventListener('timeupdate', () => this.updateProgress());
+          this.progressBar?.addEventListener('click', (e) => this.seek(e));
+          
+          this.video.addEventListener('play', () => {
+            this.playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
+          });
+          
+          this.video.addEventListener('pause', () => {
+            this.playPauseBtn.innerHTML = '<i class="fas fa-play"></i>';
+          });
+          
+          this.video.addEventListener('ended', () => {
+            this.playPauseBtn.innerHTML = '<i class="fas fa-redo"></i>';
+          });
+        },
+        
+        togglePlay() {
+          if (this.video.paused) {
+            this.video.play().catch(error => {
+              console.warn('Playback failed:', error);
+              this.handleVideoError();
+            });
+          } else {
+            this.video.pause();
+          }
+        },
+        
+        toggleMute() {
+          this.video.muted = !this.video.muted;
+          this.muteBtn.innerHTML = this.video.muted ? 
+            '<i class="fas fa-volume-mute"></i>' : 
+            '<i class="fas fa-volume-up"></i>';
+        },
+        
+        updateProgress() {
+          if (!this.progress) return;
+          const percent = (this.video.currentTime / this.video.duration) * 100;
+          this.progress.style.width = `${percent}%`;
+        },
+        
+        seek(event) {
+          const percent = (event.offsetX / this.progressBar.offsetWidth);
+          this.video.currentTime = percent * this.video.duration;
+        },
+        
+        handleVideoError() {
+          const wrapper = this.video.closest('.video-wrapper');
+          if (wrapper) {
+            wrapper.classList.add('video-error');
+            wrapper.innerHTML = `
+              <div class="video-error-message">
+                <i class="fas fa-exclamation-circle"></i>
+                <p>Sorry, there was an error loading the video.</p>
+                <a href="./assets/empotech.mp4" class="download-link">
+                  <i class="fas fa-download"></i> Download Video
+                </a>
+              </div>
+            `;
+          }
+        }
+      };
+
+      videoPlayer.init();
+    });
+    window.addEventListener('load', () => {
+      document.body.classList.remove('loading');
     });
   </script>
 </body>
